@@ -21,6 +21,7 @@ import {
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LocalStorage from '@/utils/LocalStorage';
+import Home from '@/page/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,12 +42,23 @@ const ProfileScreen = ({ navigation, route }) => {
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   global.localStorage = LocalStorage;
-
-  return <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
+  const _theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      text:'red'
+    }
+  }
+  return <NavigationContainer
+    theme={isDarkMode ? DarkTheme : _theme}
+    ref={(ref) => {
+      global.AppNavigation = ref
+    }}
+  >
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={{ title: 'Welcome' }}
       />
       <Stack.Screen name="Profile" component={ProfileScreen} />
