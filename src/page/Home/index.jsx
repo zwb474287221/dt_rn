@@ -7,7 +7,7 @@ export default function Index() {
   console.log({styles});
   return (
     <View>
-      <Text style={styles.text}>index</Text>
+      <Text style={styles.text}>index22222222</Text>
       <Button
       title="Go to Jane's profile"
       onPress={() =>
