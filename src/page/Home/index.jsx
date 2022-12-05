@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, AppNavigation} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {getBaseStyles} from '@/styles/base';
 
 export default function Index() {
