@@ -3,7 +3,9 @@ import {StackActions, CommonActions} from '@react-navigation/native';
 declare const AppNavigation: any
 
 export const jump = (where: string, data?: any) => {
-  AppNavigation?.current?.dispatch?.(
+  console.log(AppNavigation);
+  
+  AppNavigation?.dispatch?.(
     CommonActions.navigate({
       name: where,
       params: data,
@@ -12,23 +14,23 @@ export const jump = (where: string, data?: any) => {
 }
 
 export const getCurrentRoute = () => {
-  return AppNavigation?.current?.getCurrentRoute?.();
+  return AppNavigation?.getCurrentRoute?.();
 }
 
 export const replace = (where: string, data?: any) => {
-  AppNavigation?.current?.dispatch?.(
+  AppNavigation?.dispatch?.(
     StackActions.replace(where, data)
   );
 }
 
 export const reset = (where: string, index?: number, params?: any) => {
-  AppNavigation?.current?.reset?.({
+  AppNavigation?.reset?.({
     index: index || 0,
     routes: [{name: where, params}],
   });
 }
 export const goBack = () => {
-  AppNavigation?.current?.goBack?.();
+  AppNavigation?.goBack?.();
 }
 
 export function hideShadow(navigation: any) {

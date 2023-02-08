@@ -1,16 +1,17 @@
 import React from 'react';
-import {View, Text, Button, AppNavigation} from 'react-native';
-import {getBaseStyles} from '@/styles/base';
+import {View, Text, Button} from 'react-native';
+import {useStyles} from '@/styles/base';
+import { jump } from '@/utils/Navigation';
 
 export default function Index() {
-  const styles = getBaseStyles();
+  const styles = useStyles();
   console.log({styles});
   return (
     <View>
       <Text style={styles.text}>index22222222</Text>
       <Button
-        title="Go to Jane's profile"
-        onPress={() => AppNavigation.navigate('Profile', {name: 'Jane'})}
+        title="去登陆"
+        onPress={() => jump('Login')}
       />
     </View>
   );
