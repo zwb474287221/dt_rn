@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
+import LoginStyle from '@/page/login/styles';
 
 const Styles = {
   LightStyle: null,
@@ -10,6 +11,7 @@ const getStyle = (type, colors) => {
   if (!Styles[type]) {
     Styles[type] = StyleSheet.create({
       text: {color: colors.text},
+      ...LoginStyle(colors),
     });
   }
   return Styles[type];
