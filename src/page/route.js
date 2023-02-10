@@ -3,7 +3,7 @@ import React from 'react';
 import {NavigationContainer, DarkTheme, DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '@/page/home';
+import Home from '@/page/Home';
 import Mine from '@/page/mine';
 import Login from '@/page/login';
 import {useTheme} from '@/context/theme';
