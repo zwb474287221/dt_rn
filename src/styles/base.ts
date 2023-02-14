@@ -2,14 +2,23 @@ import {StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import LoginStyle from '@/page/login/styles';
 
-const Styles = {
+const Styles: { [key: string]: any } = {
   LightStyle: null,
   DarkStyle: null,
 };
 
-const getStyle = (type, colors) => {
+export interface ColorsType {
+  background:string,
+  border: string,
+  card: string,
+  primary:string,
+  text:string,
+}
+
+const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType) => {
   if (!Styles[type]) {
     Styles[type] = StyleSheet.create({
+      wrapper: { flex: 1 },
       text: {color: colors.text},
       ...LoginStyle(colors),
     });
@@ -17,7 +26,7 @@ const getStyle = (type, colors) => {
   return Styles[type];
 };
 
-const getStyleFormTheme = (isDark, colors) => {
+const getStyleFormTheme = (isDark: boolean, colors: ColorsType) => {
   return getStyle(isDark ? 'DarkStyle' : 'LightStyle', colors);
 };
 

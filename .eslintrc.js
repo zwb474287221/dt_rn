@@ -8,6 +8,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+    'react-hooks/exhaustive-deps': 'warn',
     'no-console': 0,
     'react/no-unused-state': 1,
     'prettier/prettier': [
