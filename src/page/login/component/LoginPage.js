@@ -10,19 +10,15 @@ export default function LoginPage(props) {
   const styles = useStyles();
   const { onBack } = props;
   return (
-    <ScrollView contentContainerStyle={styles.loginWrapper} keyboardShouldPersistTaps={'always'}>
+    <ScrollView contentContainerStyle={styles.loginWrapper}>
       <SafeAreaView contentContainerStyle={styles.loginWrapper}>
         <TouchableOpacity
-          style={{
-            position: 'absolute',
-            paddingRight: 10,
-            paddingBottom: 10,
-          }}
+          style={styles.loginBack}
           onPress={onBack || goBack}>
-          <Icon name={'iconfanhui1-copy'} size={scaleSize(20)} />
+          <Icon name={'iconfanhui1-copy'} style={styles.loginBackIcon} size={scaleSize(20)} />
         </TouchableOpacity>
         <Text style={styles.loginTitle}>{props.title}</Text>
-        <Text>{props.tip}</Text>
+        <Text style={styles.loginTip}>{props.tip}</Text>
         <View>{props.children}</View>
       </SafeAreaView>
     </ScrollView>

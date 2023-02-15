@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {useTheme} from '@/context/theme';
-import {useStyles} from '@/styles/base';
+import {Text, TouchableOpacity} from 'react-native';
+import {useStyles, getThemeColro} from '@/styles/base';
 import * as api from './service';
-import {useLocal, ZH_CN, EN_US} from '@/context/local';
+import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
-import Button from '@/components/Button';
+import LinearButton from '@/components/LinearButton';
 
 export default function Login(props) {
-  const [text, setText] = useState('77');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const styles = useStyles();
-  const {setTheme} = useTheme();
-  const {useGet, setLocal} = useLocal();
+  const colors = getThemeColro();
+  const {useGet} = useLocal();
   console.log(styles);
-  setTheme('dark');
+
   const login = () => {
-    setText('123sss');
+    console.log(email, password);
     api
       .login({
-        username: 'haijian',
-        password: '123456',
+        username: email,
+        password: password,
       })
       .then(res => {
         console.log(res);
@@ -28,15 +28,39 @@ export default function Login(props) {
       .catch();
   };
   return (
-    <LoginPage title={useGet('login.title')} navigation={props.navigation}>
-      <TextInputHaveClose />
-      <Button>
-        <Text>
-          {useGet('login.title')}
+    <LoginPage
+      title={useGet('login.title')}
+      navigation={props.navigation}
+      tip={useGet('login.sign.in.tip')}>
+      <TextInputHaveClose
+        style={styles.loginInput}
+        inputStyle={styles.loginBackIcon}
+        placeholder={useGet('login.placeholder.Email')}
+        placeholderTextColor={colors.fff20}
+        onChangeText={setEmail}
+      />
+      <TextInputHaveClose
+        style={styles.loginInput}
+        inputStyle={styles.loginBackIcon}
+        placeholder={useGet('login.placeholder.Password')}
+        placeholderTextColor={colors.fff20}
+        theSecureTextEntry
+        secureTextEntry
+        onChangeText={setPassword}
+      />
+      <TouchableOpacity>
+        <Text style={styles.loginTip}>{useGet('login.forget.password')}</Text>
+      </TouchableOpacity>
+      <LinearButton style={styles.loginButton} onPress={login}>
+        <Text style={[styles.text, styles.font16, styles.fw700]}>{useGet('login.title')}</Text>
+      </LinearButton>
+      <Text style={[styles.loginTip, {textAlign: 'center'}]}>
+        {useGet('login.nothave.account')}
+        <Text style={[styles.text, styles.fw700, {marginLeft: 8}]}>
+          {'  '}
+          {useGet('login.sign.up')}
         </Text>
-      </Button>
-      {/* <Button onPress={() => setLocal(ZH_CN)} title="设置中文" />
-      <Button onPress={() => setLocal(EN_US)} title="设置英文" /> */}
+      </Text>
     </LoginPage>
   );
 }

@@ -29,6 +29,9 @@ const lightTheme = {
     card: '#FFF',
     primary: '#7962E7',
     text: '#000',
+    fff20: '#CCD7E5',
+    fff30: '#A2ABCA',
+    fff40: '#7B86AD'
   },
 };
 const darkTheme = {
@@ -39,6 +42,9 @@ const darkTheme = {
     card: '#192738',
     primary: '#7962E7',
     text: '#fff',
+    fff20: 'rgba(255, 255, 255, 0.2)',
+    fff30: 'rgba(255, 255, 255, 0.3)',
+    fff40: 'rgba(255, 255, 255, 0.4)'
   },
 };
 
@@ -49,7 +55,6 @@ const Route = () => {
   return (
     <>
       <StatusBar
-        translucent
         backgroundColor={isDarkMode ? darkTheme.colors.background : lightTheme.colors.background}
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />

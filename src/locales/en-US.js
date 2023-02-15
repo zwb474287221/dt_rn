@@ -1,6 +1,6 @@
-import test from './en-US/test';
+import login from './en-US/login';
 
 export default {
   lang: 'Languages',
-  ...test,
+  ...login,
 };

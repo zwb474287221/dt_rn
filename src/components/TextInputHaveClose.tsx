@@ -54,9 +54,6 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
       style: [
         styles.TextInput,
         this.props.inputStyle,
-        {
-          borderBottomColor: '#2a2a2b',
-        },
         isAndroid && !this.props.notClearButton ? {paddingRight: 40} : null
       ],
     });
@@ -74,9 +71,6 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
       style: [
         styles.TextInput,
         this.props.inputStyle,
-        {
-          borderBottomColor: '#d4d4d3',
-        },
         isAndroid && !this.props.notClearButton ? {paddingRight: 0} : null
       ],
     });
@@ -187,12 +181,8 @@ const styles = StyleSheet.create({
   TextInput: {
     margin: 0,
     padding: 0,
-    backgroundColor: '#fff',
     flex: 1,
-    fontSize: scaleSize(14),
-    color:'#333',
-    borderBottomColor: '#d4d4d3',
-    borderBottomWidth: 2,
+    fontSize: scaleSize(14)
   },
   secureTextEntryView: {
     position: 'absolute',
