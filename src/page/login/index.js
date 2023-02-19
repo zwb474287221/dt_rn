@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {useStyles, getThemeColro} from '@/styles/base';
 import * as api from './service';
@@ -6,22 +6,26 @@ import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
 import LinearButton from '@/components/LinearButton';
+import {jump} from '@/utils/Navigation';
 
 export default function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const accountInfo = useRef({
+    username: '',
+    password: '',
+  });
   const styles = useStyles();
   const colors = getThemeColro();
   const {useGet} = useLocal();
   console.log(styles);
 
+  const setValue = (value, type) => {
+    accountInfo.current[type] = value;
+  };
+
   const login = () => {
-    console.log(email, password);
+    console.log(accountInfo.current);
     api
-      .login({
-        username: email,
-        password: password,
-      })
+      .login(accountInfo.current)
       .then(res => {
         console.log(res);
       })
@@ -29,7 +33,7 @@ export default function Login(props) {
   };
   return (
     <LoginPage
-      title={useGet('login.title')}
+      title={useGet('login.sign.in')}
       navigation={props.navigation}
       tip={useGet('login.sign.in.tip')}>
       <TextInputHaveClose
@@ -37,7 +41,7 @@ export default function Login(props) {
         inputStyle={styles.loginBackIcon}
         placeholder={useGet('login.placeholder.Email')}
         placeholderTextColor={colors.fff20}
-        onChangeText={setEmail}
+        onChangeText={value => setValue(value, 'username')}
       />
       <TextInputHaveClose
         style={styles.loginInput}
@@ -46,21 +50,23 @@ export default function Login(props) {
         placeholderTextColor={colors.fff20}
         theSecureTextEntry
         secureTextEntry
-        onChangeText={setPassword}
+        onChangeText={value => setValue(value, 'password')}
       />
       <TouchableOpacity>
         <Text style={styles.loginTip}>{useGet('login.forget.password')}</Text>
       </TouchableOpacity>
       <LinearButton style={styles.loginButton} onPress={login}>
-        <Text style={[styles.text, styles.font16, styles.fw700]}>{useGet('login.title')}</Text>
+        <Text style={[styles.text, styles.font16, styles.fw700]}>{useGet('login.sign.in')}</Text>
       </LinearButton>
-      <Text style={[styles.loginTip, {textAlign: 'center'}]}>
-        {useGet('login.nothave.account')}
-        <Text style={[styles.text, styles.fw700, {marginLeft: 8}]}>
-          {'  '}
-          {useGet('login.sign.up')}
+      <TouchableOpacity style={styles.center} onPress={() => jump('Register')}>
+        <Text style={styles.loginTip}>
+          {useGet('login.nothave.account')}
+          <Text style={[styles.text, styles.fw700]}>
+            {'  '}
+            {useGet('login.sign.up')}
+          </Text>
         </Text>
-      </Text>
+      </TouchableOpacity>
     </LoginPage>
   );
 }

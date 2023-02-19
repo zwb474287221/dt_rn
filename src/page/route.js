@@ -7,6 +7,8 @@ import {StatusBar} from 'react-native';
 import Home from '@/page/Home';
 import Mine from '@/page/mine';
 import Login from '@/page/login';
+import Register from '@/page/login/register';
+
 import {useTheme} from '@/context/theme';
 
 const Stack = createNativeStackNavigator();
@@ -54,10 +56,7 @@ const Route = () => {
 
   return (
     <>
-      <StatusBar
-        backgroundColor={isDarkMode ? darkTheme.colors.background : lightTheme.colors.background}
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-      />
+      <StatusBar translucent={true} backgroundColor={"transparent"}/>
       <NavigationContainer
         theme={isDarkMode ? darkTheme : lightTheme}
         ref={ref => {
@@ -65,7 +64,8 @@ const Route = () => {
         }}>
         <Stack.Navigator>
           <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}} />
-          <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

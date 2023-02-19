@@ -1,5 +1,5 @@
 export default {
-  'login.title': '登陆',
+  'login.sign.in': '登陆',
   'login.sign.in.tip': '账号',
   'login.placeholder.Email': 'Email',
   'login.placeholder.Password': '密码',
