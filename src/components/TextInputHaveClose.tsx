@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   TextInput,
   View,
   TouchableOpacity,
   StyleSheet,
+  TouchableWithoutFeedback,
   StyleProp, ViewStyle, TextInputProps, TextStyle,
 } from 'react-native';
-import {isAndroid, scaleSize} from '@/utils/ScreenUtil';
+import { isAndroid, scaleSize } from '@/utils/ScreenUtil';
 import Icon from './Icon';
 
 export interface TextInputHaveCloseProps extends TextInputProps {
@@ -18,12 +19,12 @@ export interface TextInputHaveCloseProps extends TextInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   onChangeText?: (text: string) => void;
+  clearIconColor?: string
 }
 
 interface TextInputHaveCloseState {
   showClear: boolean,
   isSecureTextEntry: boolean,
-  right: number,
   value?: string,
 }
 
@@ -37,24 +38,21 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
       isSecureTextEntry: props.theSecureTextEntry
         ? props.theSecureTextEntry
         : false,
-      right: 10,
       value: props.defaultValue,
     };
   }
 
   _onFocus = () => {
-    if (this.props.value !== '' || this.state.value !== '') {
+    if ((this.props.value !== '' || this.state.value !== '') && this.state.showClear) {
       this.setState({
         showClear: true,
-        right: 40,
       });
     }
-    this.props.onFocus && this.props.onFocus();
     this.input.setNativeProps({
       style: [
         styles.TextInput,
         this.props.inputStyle,
-        isAndroid && !this.props.notClearButton ? {paddingRight: 40} : null
+        isAndroid && !this.props.notClearButton ? { paddingRight: scaleSize(40) } : null
       ],
     });
     this.props.onFocus && this.props.onFocus();
@@ -64,14 +62,13 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
     if (this.state.showClear) {
       this.setState({
         showClear: false,
-        right: 10,
       });
     }
     this.input.setNativeProps({
       style: [
         styles.TextInput,
         this.props.inputStyle,
-        isAndroid && !this.props.notClearButton ? {paddingRight: 0} : null
+        isAndroid && !this.props.notClearButton ? { paddingRight: 0 } : null
       ],
     });
     this.props.onBlur && this.props.onBlur();
@@ -81,12 +78,10 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
     if (text === '') {
       this.setState({
         showClear: false,
-        right: 10,
       });
     } else if (!this.state.showClear) {
       this.setState({
         showClear: true,
-        right: 40,
       });
     }
     this.setState({
@@ -104,28 +99,28 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
   secureTextEntry = () => {
     return (
       <TouchableOpacity
-        style={[styles.secureTextEntryView, {right: this.state.right}]}
+        style={styles.secureTextEntryView}
         onPress={this._clickTextEntry}>
         <Icon
           name={
             this.state.isSecureTextEntry ? 'iconyincang' : 'iconxianshimima'
           }
           size={scaleSize(16)}
-          color={'#999'}
+          color={this.props.inputStyle?.color ?? '#999'}
         />
       </TouchableOpacity>
     );
   };
 
-  clear() {
+  clear = () => {
     this.input.clear();
   }
 
-  focus() {
+  focus = () => {
     this.input.focus();
   }
 
-  blur() {
+  blur = () => {
     this.input.blur();
   }
 
@@ -141,33 +136,35 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
       ...other
     } = this.props;
     return (
-      <View style={[styles.TextInputView, style]}>
-        <TextInput
-          style={[styles.TextInput, inputStyle]}
-          ref={item => this.input = item}
-          autoCorrect={false}
-          onChangeText={this._onChangeText}
-          onFocus={this._onFocus}
-          onBlur={this._onBlur}
-          autoCapitalize="none"
-          placeholderTextColor={'#aaa'}
-          clearButtonMode={notClearButton ? 'never' : 'while-editing'}
-          secureTextEntry={this.state.isSecureTextEntry}
-          value={this.state.value}
-          {...other}
-        />
-        {secureTextEntry && this.secureTextEntry()}
-        {!notClearButton && this.state.showClear && isAndroid ? (
-          <TouchableOpacity
-            style={{position: 'absolute', right: 10, width: 20}}
-            onPress={() => {
-              this.input.clear();
-              this.setState({showClear: false, right: 10});
-            }}>
-            <Icon name={'iconcuowu'} size={16} color={'#9c9c9c'}/>
-          </TouchableOpacity>
-        ) : null}
-      </View>
+      <TouchableWithoutFeedback onPress={this.focus}>
+        <View style={[styles.TextInputView, style]}>
+          <TextInput
+            style={[styles.TextInput, inputStyle]}
+            ref={item => this.input = item}
+            autoCorrect={false}
+            onChangeText={this._onChangeText}
+            onFocus={this._onFocus}
+            onBlur={this._onBlur}
+            autoCapitalize="none"
+            placeholderTextColor={'#aaa'}
+            clearButtonMode={notClearButton ? 'never' : 'while-editing'}
+            secureTextEntry={this.state.isSecureTextEntry}
+            value={this.state.value}
+            {...other}
+          />
+          {secureTextEntry && this.secureTextEntry()}
+          {!notClearButton && this.state.showClear && isAndroid ? (
+            <TouchableOpacity
+              style={{ position: 'absolute', right: scaleSize(10), width: scaleSize(20) }}
+              onPress={() => {
+                this.input.clear();
+                this.setState({ showClear: false, value: '', });
+              }}>
+              <Icon name={'iconcuowu'} size={16} color={this.props.inputStyle?.color || '#999'} />
+            </TouchableOpacity>
+          ) : null}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -186,6 +183,7 @@ const styles = StyleSheet.create({
   },
   secureTextEntryView: {
     position: 'absolute',
+    right: scaleSize(40)
   },
 });
 

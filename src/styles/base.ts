@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import { useTheme  } from '@react-navigation/native';
 import LoginStyle from '@/page/login/styles';
 import { scaleSize } from '@/utils/ScreenUtil';
 
@@ -16,7 +16,9 @@ export interface ColorsType {
   text: string,
   fff20?: string,
   fff30?: string,
-  fff40?: string
+  fff40?: string,
+  inputBg?: string,
+  linearText: string,
 }
 
 const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) => {
@@ -25,7 +27,8 @@ const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) =>
       wrapper: { flex: 1 },
       text: { color: colors.text },
       font16: { fontSize: scaleSize(16) },
-      fw700:{fontWeight: "700"},
+      fw700: { fontWeight: "700" },
+      linearText: { color: colors.linearText },
       center: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,7 +49,7 @@ export const useStyles = () => {
   return getStyleFormTheme(theme.dark, theme.colors);
 };
 
-export const getThemeColro = (): ColorsType => {
+export const getThemeColor = (): ColorsType => {
   const theme = useTheme();
   return theme.colors;
 }

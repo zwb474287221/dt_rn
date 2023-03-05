@@ -6,9 +6,9 @@ import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
 import LinearButton from '@/components/LinearButton';
-import {goBack, reset} from '@/utils/Navigation';
+import {goBack} from '@/utils/Navigation';
 
-export default function Register(props) {
+export default function Forget(props) {
   const styles = useStyles();
   const colors = getThemeColor();
   const { local, useGet } = useLocal();
@@ -25,26 +25,19 @@ export default function Register(props) {
     accountInfo.current[type] = value;
   };
 
-  const register = () => {
+  const forget = () => {
     api
       .register(accountInfo.current)
       .then(res => {
-        // setLoading(false);
-        // 登陆成功
-        if (res && res.code === 0) {
-          // message.success(useGet('register.success'));
-          reset('Login');
-        }
-        // message.success(intl.formatMessage({ id: 'register.success' }))
         console.log(res);
       })
       .catch();
   };
   return (
     <LoginPage
-      title={useGet('login.sign.up')}
+      title={useGet('login.forget.password')}
       navigation={props.navigation}
-      tip={useGet('login.sign.up.tip')}>
+      tip={useGet('login.forget.password.tip')}>
       <TextInputHaveClose
         style={styles.loginInput}
         inputStyle={styles.loginBackIcon}
@@ -77,7 +70,7 @@ export default function Register(props) {
         placeholderTextColor={colors.fff20}
         onChangeText={value => setValue(value, 'register_code')}
       />
-      <LinearButton style={styles.loginButton2} onPress={register}>
+      <LinearButton style={styles.loginButton2} onPress={forget}>
         <Text style={[styles.linearText, styles.font16, styles.fw700]}>{useGet('login.sign.up')}</Text>
       </LinearButton>
       <TouchableOpacity style={styles.center} onPress={goBack}>

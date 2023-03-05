@@ -10,6 +10,7 @@ import Login from '@/page/login';
 import Register from '@/page/login/register';
 
 import {useTheme} from '@/context/theme';
+import Forget from './login/forget';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +34,9 @@ const lightTheme = {
     text: '#000',
     fff20: '#CCD7E5',
     fff30: '#A2ABCA',
-    fff40: '#7B86AD'
+    fff40: '#7B86AD',
+    inputBg: '#F1F6FC',
+    linearText: '#fff',
   },
 };
 const darkTheme = {
@@ -46,7 +49,9 @@ const darkTheme = {
     text: '#fff',
     fff20: 'rgba(255, 255, 255, 0.2)',
     fff30: 'rgba(255, 255, 255, 0.3)',
-    fff40: 'rgba(255, 255, 255, 0.4)'
+    fff40: 'rgba(255, 255, 255, 0.4)',
+    inputBg: '#1D2E43',
+    linearText: '#fff',
   },
 };
 
@@ -65,7 +70,8 @@ const Route = () => {
         <Stack.Navigator>
           <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+          <Stack.Screen name="Forget" component={Forget} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

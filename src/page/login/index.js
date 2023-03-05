@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {useStyles, getThemeColro} from '@/styles/base';
+import {useStyles, getThemeColor} from '@/styles/base';
 import * as api from './service';
 import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
@@ -14,7 +14,7 @@ export default function Login(props) {
     password: '',
   });
   const styles = useStyles();
-  const colors = getThemeColro();
+  const colors = getThemeColor();
   const {useGet} = useLocal();
   console.log(styles);
 
@@ -52,11 +52,11 @@ export default function Login(props) {
         secureTextEntry
         onChangeText={value => setValue(value, 'password')}
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => jump('Forget')}>
         <Text style={styles.loginTip}>{useGet('login.forget.password')}</Text>
       </TouchableOpacity>
       <LinearButton style={styles.loginButton} onPress={login}>
-        <Text style={[styles.text, styles.font16, styles.fw700]}>{useGet('login.sign.in')}</Text>
+        <Text style={[styles.linearText, styles.font16, styles.fw700]}>{useGet('login.sign.in')}</Text>
       </LinearButton>
       <TouchableOpacity style={styles.center} onPress={() => jump('Register')}>
         <Text style={styles.loginTip}>
