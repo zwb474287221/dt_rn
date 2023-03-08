@@ -18,7 +18,8 @@ export interface ColorsType {
   fff30?: string,
   fff40?: string,
   inputBg?: string,
-  linearText: string,
+  linearText?: string,
+  messageBg?: string,
 }
 
 const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) => {
@@ -39,7 +40,7 @@ const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) =>
   return Styles[type];
 };
 
-const getStyleFormTheme = (isDark: boolean, colors: ColorsType) => {
+const getStyleFormTheme = (isDark: boolean, colors: ColorsType | any) => {
   return getStyle(isDark ? 'DarkStyle' : 'LightStyle', colors);
 };
 
@@ -49,7 +50,7 @@ export const useStyles = () => {
   return getStyleFormTheme(theme.dark, theme.colors);
 };
 
-export const getThemeColor = (): ColorsType => {
+export const getThemeColor = (): ColorsType | any => {
   const theme = useTheme();
   return theme.colors;
 }

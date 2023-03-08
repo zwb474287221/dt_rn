@@ -8,6 +8,7 @@ import Home from '@/page/Home';
 import Mine from '@/page/mine';
 import Login from '@/page/login';
 import Register from '@/page/login/register';
+import Message from '@/components/Message';
 
 import {useTheme} from '@/context/theme';
 import Forget from './login/forget';
@@ -37,6 +38,7 @@ const lightTheme = {
     fff40: '#7B86AD',
     inputBg: '#F1F6FC',
     linearText: '#fff',
+    messageBg: '#F2F2F2CC',
   },
 };
 const darkTheme = {
@@ -52,6 +54,7 @@ const darkTheme = {
     fff40: 'rgba(255, 255, 255, 0.4)',
     inputBg: '#1D2E43',
     linearText: '#fff',
+    messageBg: '#1E1E1EBF',
   },
 };
 
@@ -73,6 +76,7 @@ const Route = () => {
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
           <Stack.Screen name="Forget" component={Forget} options={{ headerShown: false }} />
         </Stack.Navigator>
+        <Message ref={_ref => (global.message = _ref)} />
       </NavigationContainer>
     </>
   );
