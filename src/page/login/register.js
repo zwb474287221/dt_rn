@@ -24,6 +24,7 @@ export default function Register(props) {
   const setValue = (value, type) => {
     accountInfo.current[type] = value;
   };
+  const tip = useGet('register.success');
 
   const register = () => {
     api
@@ -32,11 +33,11 @@ export default function Register(props) {
         // setLoading(false);
         // 登陆成功
         if (res && res.code === 0) {
-          // message.success(useGet('register.success'));
+          global.message.show({
+            title: tip,
+          });
           reset('Login');
         }
-        // message.success(intl.formatMessage({ id: 'register.success' }))
-        console.log(res);
       })
       .catch();
   };

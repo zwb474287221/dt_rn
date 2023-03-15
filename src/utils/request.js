@@ -64,6 +64,10 @@ export default class Network {
     return network[type](url, data, header);
   }
 
+  static async Post(url, data, needLogin = true) {
+    return Network.sendRequest(url, data, 'post');
+  }
+
   /**
    * get请求带token，没有跳到登陆
    * @param url 地址

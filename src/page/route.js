@@ -1,26 +1,43 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StatusBar} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StatusBar, Text } from 'react-native';
 import Home from '@/page/Home';
 import Mine from '@/page/mine';
 import Login from '@/page/login';
 import Register from '@/page/login/register';
 import Message from '@/components/Message';
 
-import {useTheme} from '@/context/theme';
+import { useTheme } from '@/context/theme';
 import Forget from './login/forget';
+import FormattedMessage from '@/components/FormattedMessage';
+import Icon from '@/components/Icon';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const RenderIcon = memo((props) => {
+  const { focused, activeName, name } = props;
+  return <Icon {...props} name={focused ? activeName : name} size={20} />
+})
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Settings" component={Mine} />
+      <Tab.Screen name="Home" component={Home} options={{
+        tabBarLabel: ({ color }) => <FormattedMessage
+          style={{ color }} id={"Home"} />,
+        tabBarIcon: (props) => <RenderIcon {...props} name={'iconshouye'} activeName={'iconshouyexuanzhong'} />,
+      }} />
+      <Tab.Screen name="My" component={Mine}
+        options={{
+          tabBarLabel: ({ color }) => <FormattedMessage
+            style={{ color }} id={"MY"} />,
+          tabBarIcon: (props) => <RenderIcon {...props} name={'iconwode'} activeName={'iconwode-xuanzhong'} />,
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -64,14 +81,14 @@ const Route = () => {
 
   return (
     <>
-      <StatusBar translucent={true} backgroundColor={"transparent"}/>
+      <StatusBar translucent={true} backgroundColor={"transparent"} />
       <NavigationContainer
         theme={isDarkMode ? darkTheme : lightTheme}
         ref={ref => {
           global.AppNavigation = ref;
         }}>
         <Stack.Navigator>
-          <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}} />
+          <Stack.Screen name="Tab" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
           <Stack.Screen name="Forget" component={Forget} options={{ headerShown: false }} />

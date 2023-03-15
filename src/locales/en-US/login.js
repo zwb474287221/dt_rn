@@ -6,7 +6,12 @@ export default {
   'login.forget.password': 'Forgot Password',
   'login.nothave.account': "Don't have an account?",
   'login.sign.up': 'Sign up',
-  'login.sign.up.tip': 'Register your account, better service',
+  'login.sign.up.tip': 'Join DiTing, better dex service',
   'login.invitation.code': 'Invitation code',
-  'login.have.account': 'Have an account'
+  'login.have.account': 'Have an account',
+  'register.success': 'Register Success',
+  'login.sendEmail': 'Send reset email to your mailbox',
+  'login.reset_tip': 'Please input your email first!',
+  'login.reset_success': '已给您的邮箱发送重置邮件，请注意查收',
+  'login.reset_pwd': 'Reset Password',
 };

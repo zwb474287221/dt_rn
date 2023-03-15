@@ -1,9 +1,13 @@
 import request from '@/utils/request';
 
 export function login(data) {
-  return request.tokenPost('/login', data, false);
+  return request.Post('/login', data);
 }
 
 export function register(data) {
-  return request.tokenPost('/register', data, false);
+  return request.Post('/register', data);
+}
+
+export function reset(data) {
+  return request.Post('/account/reset', data);
 }

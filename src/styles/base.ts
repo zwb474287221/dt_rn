@@ -30,6 +30,7 @@ const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) =>
       font16: { fontSize: scaleSize(16) },
       fw700: { fontWeight: "700" },
       linearText: { color: colors.linearText },
+      row: { flexDirection: 'row', alignItems: 'center' },
       center: {
         justifyContent: 'center',
         alignItems: 'center',

@@ -1,24 +1,21 @@
-import React, {useRef} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import React, {useRef,useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {useStyles, getThemeColor} from '@/styles/base';
 import * as api from './service';
 import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
 import LinearButton from '@/components/LinearButton';
-import {goBack} from '@/utils/Navigation';
+import FormattedMessage from '@/components/FormattedMessage';
+import { goBack } from '@/utils/Navigation';
 
 export default function Forget(props) {
+  const [loading, setLoading] = useState(false);
   const styles = useStyles();
   const colors = getThemeColor();
-  const { local, useGet } = useLocal();
+  const {useGet} = useLocal();
   const accountInfo = useRef({
     mail: '',
-    password: '',
-    vpassword: '',
-    register_code: '',
-    notification_lang: local,
-    notification_timezone: new Date().getTimezoneOffset(),
   });
 
   const setValue = (value, type) => {
@@ -26,18 +23,34 @@ export default function Forget(props) {
   };
 
   const forget = () => {
+    console.log(accountInfo);
+    if (!accountInfo.current.mail) {
+      global.message.show({
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        title: useGet('login.reset_tip'),
+      });
+      return;
+    }
+    setLoading(true);
     api
-      .register(accountInfo.current)
-      .then(res => {
-        console.log(res);
+      .reset({
+        mail: accountInfo.current.mail,
       })
-      .catch();
+      .then(res => {
+        if (res && res.code === 0) {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          global.message.show({ title: useGet('login.reset_success') });
+          goBack();
+        }
+      }).then(() => {
+        setLoading(false);
+      });
   };
   return (
     <LoginPage
       title={useGet('login.forget.password')}
       navigation={props.navigation}
-      tip={useGet('login.forget.password.tip')}>
+      tip={useGet('login.sendEmail')}>
       <TextInputHaveClose
         style={styles.loginInput}
         inputStyle={styles.loginBackIcon}
@@ -45,43 +58,12 @@ export default function Forget(props) {
         placeholderTextColor={colors.fff20}
         onChangeText={value => setValue(value, 'mail')}
       />
-      <TextInputHaveClose
-        style={styles.loginInput}
-        inputStyle={styles.loginBackIcon}
-        placeholder={useGet('login.placeholder.Password')}
-        placeholderTextColor={colors.fff20}
-        theSecureTextEntry
-        secureTextEntry
-        onChangeText={value => setValue(value, 'password')}
-      />
-      <TextInputHaveClose
-        style={styles.loginInput}
-        inputStyle={styles.loginBackIcon}
-        placeholder={useGet('login.placeholder.Password')}
-        placeholderTextColor={colors.fff20}
-        theSecureTextEntry
-        secureTextEntry
-        onChangeText={value => setValue(value, 'vpassword')}
-      />
-      <TextInputHaveClose
-        style={styles.loginInput}
-        inputStyle={styles.loginBackIcon}
-        placeholder={useGet('login.invitation.code')}
-        placeholderTextColor={colors.fff20}
-        onChangeText={value => setValue(value, 'register_code')}
-      />
-      <LinearButton style={styles.loginButton2} onPress={forget}>
-        <Text style={[styles.linearText, styles.font16, styles.fw700]}>{useGet('login.sign.up')}</Text>
+      <LinearButton disabled={loading} style={styles.loginButton2} onPress={forget}>
+        <FormattedMessage
+          style={[styles.linearText, styles.font16, styles.fw700]}
+          id="login.reset_pwd"
+        />
       </LinearButton>
-      <TouchableOpacity style={styles.center} onPress={goBack}>
-        <Text style={styles.loginTip}>
-          {useGet('login.have.account')}
-          <Text style={[styles.text, styles.fw700]}>
-            {'  '}
-            {useGet('login.sign.in')}
-          </Text>
-        </Text>
-      </TouchableOpacity>
     </LoginPage>
   );
 }
