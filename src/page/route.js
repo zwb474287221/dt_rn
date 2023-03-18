@@ -33,6 +33,7 @@ const TabNavigator = () => {
       }} />
       <Tab.Screen name="My" component={Mine}
         options={{
+          headerShown: false,
           tabBarLabel: ({ color }) => <FormattedMessage
             style={{ color }} id={"MY"} />,
           tabBarIcon: (props) => <RenderIcon {...props} name={'iconwode'} activeName={'iconwode-xuanzhong'} />,
@@ -53,6 +54,7 @@ const lightTheme = {
     fff20: '#CCD7E5',
     fff30: '#A2ABCA',
     fff40: '#7B86AD',
+    fff70: '#7B86AD',
     inputBg: '#F1F6FC',
     linearText: '#fff',
     messageBg: '#F2F2F2CC',
@@ -69,6 +71,7 @@ const darkTheme = {
     fff20: 'rgba(255, 255, 255, 0.2)',
     fff30: 'rgba(255, 255, 255, 0.3)',
     fff40: 'rgba(255, 255, 255, 0.4)',
+    fff70: 'rgba(255, 255, 255, 0.7)',
     inputBg: '#1D2E43',
     linearText: '#fff',
     messageBg: '#1E1E1EBF',

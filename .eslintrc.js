@@ -8,6 +8,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+    'object-curly-spacing': 'always',
     'react-hooks/exhaustive-deps': 'warn',
     'no-console': 0,
     'react/no-unused-state': 1,
