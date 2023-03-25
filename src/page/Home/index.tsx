@@ -14,7 +14,12 @@ export default function Index() {
   };
   const openErrorMessage = () => {
     message.error({
-      content: (colors) => <Text style={{ color: colors.text }}>内容</Text>,
+      content: (colors)=>(
+        <>
+          <Text style={{color:colors.text}}>您的账号密码有误</Text>
+          <Text style={{color:colors.text}}>Your account or password is incorrect</Text>
+        </>
+      ),
     });
   };
   return (

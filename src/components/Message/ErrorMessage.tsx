@@ -27,6 +27,7 @@ const Message = forwardRef<ErrorMessageAction>((props, refs) => {
       key: guid(),
       ...option,
     }));
+    setTimeout(remove, 3000)
   }, []);
 
   useImperativeHandle(refs, () => ({
@@ -38,7 +39,7 @@ const Message = forwardRef<ErrorMessageAction>((props, refs) => {
   return (
     <View style={styles.warpper}>
       {
-        messageList.map(item => <View key={item.key} style={[styles.messageItem, { backgroundColor: colors.messageBg }]} onLayout={() => setTimeout(()=>remove(), 3000)}>
+        messageList.map(item => <View key={item.key} style={[styles.messageItem, { backgroundColor: colors.messageBg }]}>
           {typeof item.content === 'function' ? item.content(colors) : item.content}
         </View>)
       }
