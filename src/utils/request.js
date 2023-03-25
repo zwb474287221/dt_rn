@@ -1,11 +1,13 @@
 import axios from 'axios';
 import config from '@/utils/config';
+import { Text } from 'react-native';
 import {getToken} from './utils';
 
 export const API_SERVER = config.API_SERVER;
 
 const network = axios.create({
   baseURL: API_SERVER,
+  withCredentials: true,  // send cookies when cross-domain requests
   // timeout: 5000,
 });
 
@@ -20,7 +22,118 @@ network.interceptors.response.use(
   async response => {
     // 请求返会统一处理
     console.log(response);
-    return response.data;
+    const res = response.data;
+    console.log(res);
+    if (res && res.code !== 0 && res.code !== 101) {
+      if (res.code === 2) {
+        message.error({
+          content: (colors) => (
+            <>
+              <Text style={{color:colors.text}}>该邮箱已被注册</Text>
+              <Text style={{color:colors.text}}>This email has been registered</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 102) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>您的账号密码有误</Text>
+              <Text style={{color:colors.text}}>Your account or password is incorrect</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 103) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>持仓监控数量超出限制，需要升级VIP</Text>
+              <Text style={{color:colors.text}}>Token Monitor is exceed limit</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 104) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>钱包监控数量超出限制，需要升级VIP</Text>
+              <Text style={{color:colors.text}}>Wallet Monitor is exceed limit</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 105) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>币价监控数量超出限制，需要升级VIP</Text>
+              <Text style={{color:colors.text}}>Pool Price Monitor is exceed limit</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 106) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>设置的阈值错误</Text>
+              <Text style={{color:colors.text}}>Threshold error</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 107) {
+        // message.error({
+        //   content: '邮箱未完成验证，请前往注册邮箱进行验证后登录', // Threshold error
+        // })
+        return res;
+      } else if (res.code === 108) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>VIP级别不够</Text>
+              <Text style={{color:colors.text}}>Need High Level VIP</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 109) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>邮箱发送失败!请联系客服</Text>
+              <Text style={{color:colors.text}}>Send email error</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 110) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>邮箱发送太频繁了，请2分钟后再试</Text>
+              <Text style={{color:colors.text}}>Send email too often,please retry 2 minutes later</Text>
+            </>
+          ),
+        });
+      } else if (res.code === 1) {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>服务器开小差了，请稍后再试</Text>
+              <Text style={{color:colors.text}}>Sever is busy, Please retry later</Text>
+            </>
+          ),
+        });
+      } else {
+        message.error({
+          content: (colors)=>(
+            <>
+              <Text style={{color:colors.text}}>{res.message_cn}</Text>
+              <Text style={{color:colors.text}}>{res.message_en}</Text>
+            </>
+          ),
+        });
+      }
+      // return Promise.reject(new Error(res.message || 'Error'))
+    } else {
+      return res;
+    }
   },
   error => {
     console.log(error);

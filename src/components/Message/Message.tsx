@@ -1,22 +1,22 @@
 import React, { useCallback, useState, forwardRef, useImperativeHandle } from 'react'
-import Mask from './Mask';
+import Mask from '../Mask';
 import { View, Text, StyleSheet } from 'react-native';
 import { getThemeColor } from '@/styles/base';
 import { scaleSize } from '@/utils/ScreenUtil';
-import Button from './Button';
+import Button from '../Button';
 
-export interface MessageAction {
+export interface TipMessageAction {
   show(option: MessageOption): void,
 }
 
-type MessageOption = {
+export type MessageOption = {
   title?: string,
   content?: string,
   button?: string,
   onOk?: () => void
 }
 
-const Message = forwardRef<MessageAction>((props, refs) => {
+const Message = forwardRef<TipMessageAction>((props, refs) => {
   const [option, setOption] = useState<null | MessageOption>(null);
 
   const close = useCallback(() => {
