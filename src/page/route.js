@@ -14,13 +14,14 @@ import { useTheme } from '@/context/theme';
 import Forget from './login/forget';
 import FormattedMessage from '@/components/FormattedMessage';
 import Icon from '@/components/Icon';
+import { scaleSize } from '@/utils/ScreenUtil';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const RenderIcon = memo((props) => {
   const { focused, activeName, name } = props;
-  return <Icon {...props} name={focused ? activeName : name} size={20} />
+  return <Icon {...props} name={focused ? activeName : name} size={scaleSize(26)} />
 })
 
 const TabNavigator = () => {
@@ -29,7 +30,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={Home} options={{
         tabBarLabel: ({ color }) => <FormattedMessage
           style={{ color }} id={"Home"} />,
-        tabBarIcon: (props) => <RenderIcon {...props} name={'iconshouye'} activeName={'iconshouyexuanzhong'} />,
+        tabBarIcon: (props) => <RenderIcon {...props} name={'home'} activeName={'homeActivite'} />,
       }} />
       <Tab.Screen name="My" component={Mine}
         options={{

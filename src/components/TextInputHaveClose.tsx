@@ -103,10 +103,9 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
         onPress={this._clickTextEntry}>
         <Icon
           name={
-            this.state.isSecureTextEntry ? 'iconyincang' : 'iconxianshimima'
+            this.state.isSecureTextEntry ? 'eye' : 'closeeye'
           }
-          size={scaleSize(16)}
-          color={this.props.inputStyle?.color ?? '#999'}
+          size={scaleSize(24)}
         />
       </TouchableOpacity>
     );
@@ -160,7 +159,7 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
                 this.input.clear();
                 this.setState({ showClear: false, value: '', });
               }}>
-              <Icon name={'iconcuowu'} size={16} color={this.props.inputStyle?.color || '#999'} />
+              <Icon name={'iconcuowu'} size={16} />
             </TouchableOpacity>
           ) : null}
         </View>
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
   },
   secureTextEntryView: {
     position: 'absolute',
-    right: scaleSize(40)
+    right: scaleSize(16)
   },
 });
 

@@ -16,7 +16,7 @@ export default function LoginPage(props) {
           <TouchableOpacity
             style={styles.loginBack}
             onPress={onBack || goBack}>
-            <Icon name={'iconfanhui1-copy'} style={styles.loginBackIcon} size={scaleSize(20)} />
+            <Icon name={'back'} size={scaleSize(32)} />
           </TouchableOpacity>
           <Text style={styles.loginTitle}>{props.title}</Text>
           <Text style={styles.loginTip}>{props.tip}</Text>

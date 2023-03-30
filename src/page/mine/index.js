@@ -6,6 +6,7 @@ import Icon from '@/components/Icon';
 import { useStyles } from '@/styles/base';
 import { useTheme } from '@react-navigation/native';
 import { useTheme as useTheme2 } from '@/context/theme';
+import { scaleSize } from '@/utils/ScreenUtil';
 
 const img = 'https://t7.baidu.com/it/u=4198287529,2774471735&fm=193&f=GIF';
 
@@ -56,7 +57,8 @@ export default function Mine() {
               onPress={() => {
                 setTheme(theme.dark ? 'light' : 'dark');
               }}>
-              <Icon name="iconwode" style={styles.WalletIcon} />
+              <Icon style={{ width: scaleSize(20)}} name="link" />
+              {/* <Icon name="iconwode" style={styles.WalletIcon} /> */}
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={[styles.MineWallet, styles.row]}>
@@ -77,7 +79,7 @@ export default function Mine() {
         </View>
         <View style={[styles.MineCard, styles.MineInviteCodeCard]}>
           <View style={styles.row}>
-            <Icon style={[styles.text, styles.font24, { flex: 1 }]} name="iconwode" />
+            <Icon style={{ width: scaleSize(20)}} name="link" />
             <Text style={[styles.text, styles.font24, styles.fw700]}>0</Text>
           </View>
           <Text style={[styles.fff70, styles.font14, styles.marginTop8]}>Copy Invitation link</Text>
