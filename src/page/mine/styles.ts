@@ -7,7 +7,7 @@ import {
 
 export default (colors: ColorsType, dark: boolean): { [key: string]: StyleProp<ViewStyle | TextStyle> } => ({
   headerImg: { height: scaleSize(32), width: scaleSize(32), backgroundColor: '#fff', borderRadius: scaleSize(16) },
-  MineInfo: { marginTop: scaleSize(20), paddingHorizontal: scaleSize(16), justifyContent: 'space-between' },
+  MineInfo: { marginTop: scaleSize(8), paddingHorizontal: scaleSize(16), justifyContent: 'space-between' },
   Name: {
     flex: 1,
     marginHorizontal: scaleSize(8),
@@ -21,7 +21,7 @@ export default (colors: ColorsType, dark: boolean): { [key: string]: StyleProp<V
     marginHorizontal: scaleSize(16),
     paddingLeft: scaleSize(19),
     paddingRight: scaleSize(16),
-    paddingVertical: scaleSize(17),
+    paddingVertical: scaleSize(12),
     borderTopLeftRadius: scaleSize(8),
     borderTopRightRadius: scaleSize(8),
     backgroundColor:'rgba(255, 255, 255, 0.2)'
@@ -29,6 +29,16 @@ export default (colors: ColorsType, dark: boolean): { [key: string]: StyleProp<V
   WalletIcon: {
     color: '#fff',
     fontSize: scaleSize(19),
+  },
+  MineInviteesText: {
+    textAlign: 'right',
+    flex:1,
+    color: dark ? '#fff' : '#4169FF',
+  },
+  MineLinkText: {
+    textAlign: 'right',
+    flex:1,
+    color: dark ? '#fff' : '#7962E7',
   },
   WalletText: {
     flex: 1,

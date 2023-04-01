@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint --ext .jsx ./src --fix"
+    "lint": "eslint --ext .jsx ./src --fix",
+    "getIcon": "node src/components/Icon/getIcon"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",

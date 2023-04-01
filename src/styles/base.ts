@@ -33,6 +33,7 @@ const getStyle = (type: 'DarkStyle' | 'LightStyle', colors: ColorsType | any) =>
       font14: { fontSize: scaleSize(14), lineHeight: scaleSize(17) },
       font24: { fontSize: scaleSize(24), lineHeight: scaleSize(29) },
       font20: { fontSize: scaleSize(20), lineHeight: scaleSize(20) },
+      fff70: { color: colors.fff70 },
       marginTop8: { marginTop: scaleSize(8) },
       marginLeft8: { marginLeft: scaleSize(8) },
       marginRight8: { marginRight: scaleSize(8) },

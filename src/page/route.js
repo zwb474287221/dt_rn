@@ -30,14 +30,24 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={Home} options={{
         tabBarLabel: ({ color }) => <FormattedMessage
           style={{ color }} id={"Home"} />,
-        tabBarIcon: (props) => <RenderIcon {...props} name={'home'} activeName={'homeActivite'} />,
+        tabBarIcon: (props) => <RenderIcon {...props} name={'home'} activeName={'homeActive'} />,
+      }} />
+      <Tab.Screen name="Monitor" component={Home} options={{
+        tabBarLabel: ({ color }) => <FormattedMessage
+          style={{ color }} id={"Monitor"} />,
+        tabBarIcon: (props) => <RenderIcon {...props} name={'monitor'} activeName={'monitorActive'} />,
+      }} />
+      <Tab.Screen name="Market" component={Home} options={{
+        tabBarLabel: ({ color }) => <FormattedMessage
+          style={{ color }} id={"Home"} />,
+        tabBarIcon: (props) => <RenderIcon {...props} name={'market'} activeName={'marketActive'} />,
       }} />
       <Tab.Screen name="My" component={Mine}
         options={{
           headerShown: false,
           tabBarLabel: ({ color }) => <FormattedMessage
             style={{ color }} id={"MY"} />,
-          tabBarIcon: (props) => <RenderIcon {...props} name={'iconwode'} activeName={'iconwode-xuanzhong'} />,
+          tabBarIcon: (props) => <RenderIcon {...props} name={'profile'} activeName={'profileActive'} />,
         }}
       />
     </Tab.Navigator>
