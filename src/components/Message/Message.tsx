@@ -56,6 +56,7 @@ const Message = forwardRef<TipMessageAction>((props, refs) => {
           {option.button.map((item, index) => {
             return <Button key={item.key || item.title}
               style={[styles.button, {
+                flex: 1,
                 backgroundColor: 'transparent',
                 borderTopColor: colors.fff20,
                 borderLeftWidth: index > 0 && option.button && index < option.button?.length ? 1 : 0,
@@ -64,7 +65,8 @@ const Message = forwardRef<TipMessageAction>((props, refs) => {
               onPress={() => { close(); item.onPress?.() }}>
               <Text style={styles.buttonText}>{item.title}</Text>
             </Button>
-          })}</View> : <View><Button style={[styles.button, { backgroundColor: 'transparent', borderTopColor: colors.fff20 }]} onPress={buttonPress}>
+          })}</View> : <View>
+          <Button style={[styles.button, { backgroundColor: 'transparent', borderTopColor: colors.fff20 }]} onPress={buttonPress}>
             <Text style={styles.buttonText}>{option?.buttonText ?? 'OK'}</Text>
           </Button>
         </View>}
@@ -100,8 +102,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     marginTop: scaleSize(12),
     height: scaleSize(44),
-    borderRadius: 0,
-    flex: 1,
+    borderRadius: 0
   },
   buttonText: {
     fontWeight: '600',
