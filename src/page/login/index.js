@@ -6,7 +6,8 @@ import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
 import LinearButton from '@/components/LinearButton';
-import {jump} from '@/utils/Navigation';
+import {goBack, jump} from '@/utils/Navigation';
+import { useUser } from '@/context/user';
 
 export default function Login(props) {
   const accountInfo = useRef({
@@ -15,16 +16,21 @@ export default function Login(props) {
   });
   const styles = useStyles();
   const colors = getThemeColor();
-  const {useGet} = useLocal();
-  console.log(styles);
+  const { useGet } = useLocal();
+  const { getInfo } = useUser();
 
   const setValue = (value, type) => {
     accountInfo.current[type] = value;
   };
 
   const login = () => {
+    const data = {
+      username: '474287221@qq.com',
+      password: '033515',
+    }
     api
-      .login(accountInfo.current)
+      .login(data)
+      // .login(accountInfo.current)
       .then(res => {
         if (res.code === 107) {
           const { mail, token } = res.data;
@@ -47,6 +53,10 @@ export default function Login(props) {
               title: useGet('cancel'),
             }]
           })
+        }
+        if (res.code === 0) {
+          getInfo();
+          goBack();
         }
       })
   };

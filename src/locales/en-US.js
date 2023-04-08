@@ -2,6 +2,10 @@ import login from './en-US/login';
 
 export default {
   lang: 'Languages',
-  cancel:'Cancel',
+  notificationManagement:'Notification management',
+  currentLang: 'EN',
+  copySuccess: 'Copy Success',
+  cancel: 'Cancel',
+  Login:'Login',
   ...login,
 };

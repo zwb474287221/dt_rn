@@ -15,6 +15,7 @@ import Forget from './login/forget';
 import FormattedMessage from '@/components/FormattedMessage';
 import Icon from '@/components/Icon';
 import { scaleSize } from '@/utils/ScreenUtil';
+import SelectLang from './mine/selectLang';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,6 +107,7 @@ const Route = () => {
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
           <Stack.Screen name="Forget" component={Forget} options={{ headerShown: false }} />
+          <Stack.Screen name="SelectLang" component={SelectLang} />
         </Stack.Navigator>
         <Message ref={_ref => (global.message = _ref)} />
       </NavigationContainer>

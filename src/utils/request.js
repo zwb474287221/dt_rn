@@ -177,8 +177,12 @@ export default class Network {
     return network[type](url, data, header);
   }
 
-  static async Post(url, data, needLogin = true) {
+  static async Post(url, data) {
     return Network.sendRequest(url, data, 'post');
+  }
+
+  static async Get(url, data) {
+    return Network.sendRequest(url, data, 'get');
   }
 
   /**
