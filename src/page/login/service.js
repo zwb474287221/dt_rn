@@ -11,3 +11,7 @@ export function register(data) {
 export function reset(data) {
   return request.Post('/account/reset', data);
 }
+
+export function sendMail(data) {
+  return request.Post('/mail/resend', data);
+}

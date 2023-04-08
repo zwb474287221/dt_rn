@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { isAndroid, scaleSize } from '@/utils/ScreenUtil';
 import Icon from './Icon';
+import { useTheme } from '@react-navigation/native';
 
 export interface TextInputHaveCloseProps extends TextInputProps {
   theSecureTextEntry?: boolean;
@@ -20,6 +21,7 @@ export interface TextInputHaveCloseProps extends TextInputProps {
   onBlur?: () => void;
   onChangeText?: (text: string) => void;
   clearIconColor?: string
+  dark?: boolean
 }
 
 interface TextInputHaveCloseState {
@@ -138,7 +140,7 @@ class TextInputHaveClose extends Component<TextInputHaveCloseProps, TextInputHav
       <TouchableWithoutFeedback onPress={this.focus}>
         <View style={[styles.TextInputView, style]}>
           <TextInput
-            style={[styles.TextInput, inputStyle]}
+            style={[styles.TextInput, { color: this.props.dark ? '#fff' : '#000' }, inputStyle]}
             ref={item => this.input = item}
             autoCorrect={false}
             onChangeText={this._onChangeText}
@@ -178,6 +180,7 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     flex: 1,
+    fontFamily: '500',
     fontSize: scaleSize(14)
   },
   secureTextEntryView: {
@@ -186,4 +189,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TextInputHaveClose;
+const getTheme = (Components: any) => {
+  let newFunc = (props:TextInputHaveCloseProps) => {
+    const { dark } = useTheme();
+    return <Components dark={dark} {...props} />
+  };
+  return newFunc
+}
+
+export default getTheme(TextInputHaveClose);

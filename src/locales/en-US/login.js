@@ -12,6 +12,10 @@ export default {
   'register.success': 'Register Success',
   'login.sendEmail': 'Send reset email to your mailbox',
   'login.reset_tip': 'Please input your email first!',
-  'login.reset_success': '已给您的邮箱发送重置邮件，请注意查收',
+  'login.reset_success': 'Reset Email has been sent, Please check',
   'login.reset_pwd': 'Reset Password',
+  'login.step1': 'Please go to email for verification',
+  'login.step21': "If you don't get it, please try ",
+  'login.step22': 'Resend',
+  'login.hasSendMail': 'Verification Email has been sent',
 };

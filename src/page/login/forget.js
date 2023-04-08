@@ -25,8 +25,7 @@ export default function Forget(props) {
   const forget = () => {
     console.log(accountInfo);
     if (!accountInfo.current.mail) {
-      global.message.show({
-        // eslint-disable-next-line react-hooks/rules-of-hooks
+      message.show({
         title: useGet('login.reset_tip'),
       });
       return;
@@ -38,8 +37,7 @@ export default function Forget(props) {
       })
       .then(res => {
         if (res && res.code === 0) {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          global.message.show({ title: useGet('login.reset_success') });
+          message.show({ title: useGet('login.reset_success') });
           goBack();
         }
       }).then(() => {

@@ -3,8 +3,6 @@ import {StackActions, CommonActions} from '@react-navigation/native';
 declare const AppNavigation: any
 
 export const jump = (where: string, data?: any) => {
-  console.log(AppNavigation);
-  
   AppNavigation?.dispatch?.(
     CommonActions.navigate({
       name: where,

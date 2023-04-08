@@ -14,4 +14,8 @@ export default {
   'login.reset_pwd': '重置密码',
   'login.reset_tip': '请先填写邮箱，重置密码会给您的邮箱发送重置邮件',
   'login.reset_success': '已给您的邮箱发送重置邮件，请注意查收',
+  'login.step1': '请前往邮箱进行验证',
+  'login.step21': '如果没收到请尝试',
+  'login.step22': '重新发送',
+  'login.hasSendMail': '邮件已经重新发送',
 };

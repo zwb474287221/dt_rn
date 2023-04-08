@@ -23,13 +23,32 @@ export default function Login(props) {
   };
 
   const login = () => {
-    console.log(accountInfo.current);
     api
       .login(accountInfo.current)
       .then(res => {
-        console.log(res);
+        if (res.code === 107) {
+          const { mail, token } = res.data;
+          message.show({
+            title: useGet('login.step1'),
+            content: useGet('login.step21'),
+            button: [{
+              title: useGet('login.step22'),
+              onPress: () => {
+                api.sendMail({
+                  token,
+                  mail
+                }).then(res => {
+                  if (res && res.code === 0) {
+                    message.show({ title: useGet('login.hasSendMail') });
+                  }
+                })
+              }
+            },{
+              title: useGet('cancel'),
+            }]
+          })
+        }
       })
-      .catch();
   };
   return (
     <LoginPage

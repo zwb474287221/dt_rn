@@ -8,6 +8,8 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import com.facebook.react.modules.network.OkHttpClientFactory;
 import com.facebook.soloader.SoLoader;
 import com.dt_rn.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
@@ -69,6 +71,7 @@ public class MainApplication extends Application implements ReactApplication {
       Context context, ReactInstanceManager reactInstanceManager) {
     if (BuildConfig.DEBUG) {
       try {
+        OkHttpClientProvider.setOkHttpClientFactory(new CustomOkHttpClientFactory());
         /*
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode

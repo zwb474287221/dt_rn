@@ -6,7 +6,7 @@ import {useLocal} from '@/context/local';
 import LoginPage from './component/LoginPage';
 import TextInputHaveClose from '../../components/TextInputHaveClose';
 import LinearButton from '@/components/LinearButton';
-import {goBack, reset} from '@/utils/Navigation';
+import { goBack } from '@/utils/Navigation';
 
 export default function Register(props) {
   const styles = useStyles();
@@ -33,10 +33,10 @@ export default function Register(props) {
         // setLoading(false);
         // 登陆成功
         if (res && res.code === 0) {
-          global.message.show({
+          message.show({
             title: tip,
           });
-          reset('Login');
+          goBack();
         }
       })
       .catch();
